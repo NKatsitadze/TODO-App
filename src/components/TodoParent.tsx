@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
-import { clearCompletedTodos } from "../store/todoReducer";
+import { clearCompletedTodos, reorderTodo } from "../store/todoReducer";
 
 import InputForm from "./InputForm";
 import TodoComponent from "./TodoComponent";
 import Moon from '../assets/Moon.png';
 import Sun from '../assets/Sun.png';
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -21,21 +21,16 @@ const TodoParent = function(props: TodoParentPropsTypes) {
     const todosList = useSelector((state:RootState) => state.todoReducer);
     const [state, setState] = useState('All');
 
-    let [list, setList] = useState(todosList);
 
-    useEffect(()=> {
-        setList(todosList)
-    }, [todosList])
-
-    const activeRemaining = list.filter(each => {
+    const activeRemaining = todosList.filter(each => {
         return each.isActive === false
     });
 
-    const activeTasks = list.filter(each => {
+    const activeTasks = todosList.filter(each => {
         return each.isActive === false
     })
 
-    const completedTasks = list.filter(each => {
+    const completedTasks = todosList.filter(each => {
         return each.isActive === true
     })
 
@@ -55,7 +50,7 @@ const TodoParent = function(props: TodoParentPropsTypes) {
         dispatch(clearCompletedTodos())
     }
 
-    const allTasksContent = list.map((each, index) => {
+    const allTasksContent = todosList.map((each, index) => {
               return  <Draggable key={each.id} index={index} draggableId={each.id}>
                     {(provided) => (
                         <TodoComponent light={props.light} todo={each}
@@ -77,10 +72,7 @@ const TodoParent = function(props: TodoParentPropsTypes) {
 
     const dragEndHandler = function(result: any) {
         if (!result.destination) return;
-        const items = Array.from(list);
-        const [reorderedItem] = items.splice(result.source.index, 1);
-        items.splice(result.destination.index, 0, reorderedItem);
-        setList(items);
+        dispatch(reorderTodo({result: result}));
     }
 
     const themeHandler= function() {
@@ -110,7 +102,7 @@ const TodoParent = function(props: TodoParentPropsTypes) {
             </div>
             <InputForm light={props.light} />
                     <DragDropContext onDragEnd={dragEndHandler}>
-                        {list.length > 0 ? listContent : null}
+                        {todosList.length > 0 ? listContent : null}
                     </DragDropContext>
 
             <div className="filter-box">

@@ -27,8 +27,12 @@ export const todoReducer = createSlice({
             return state.filter(each => {
                 return each.isActive === false
             })
+        },
+        reorderTodo:(state, action) => {
+            const [reorderedItem] = state.splice(action.payload.result.source.index, 1);
+            state.splice(action.payload.result.destination.index, 0, reorderedItem);
         }
     }
 })
 
-export const { addTodo, removeTodo, toggleTodo, clearCompletedTodos } = todoReducer.actions
+export const { addTodo, removeTodo, toggleTodo, clearCompletedTodos, reorderTodo } = todoReducer.actions
