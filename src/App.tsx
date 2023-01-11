@@ -4,6 +4,9 @@ import { ThemeProvider } from "styled-components";
 
 import { useState } from "react";
 
+import day from './assets/Bitmap.jpg'
+import night from './assets/Bitmap.jpg';
+
 
 function App() {
   const themes = {
@@ -13,7 +16,7 @@ function App() {
       listTyping: '#494C6B',
       completed: '#D1D2DA',
       listBottomBorder: '#E3E4F1',
-      image: 'src/assets/Bitmap.jpg',
+      image: day,
       
     },
     dark: {
@@ -22,7 +25,7 @@ function App() {
       listTyping: '#C8CBE7',
       completed: '#4D5067',
       listBottomBorder: '#393A4B',
-      image: 'src/assets/BitmapNight.jpg',
+      image: night,
     }
   }
 
