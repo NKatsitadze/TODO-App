@@ -13,7 +13,8 @@ function App() {
       listTyping: '#494C6B',
       completed: '#D1D2DA',
       listBottomBorder: '#E3E4F1',
-      image: 'https://raw.githubusercontent.com/NKatsitadze/Todo-App/main/src/assets/Bitmap.jpg',
+      image: 'src/assets/Bitmap.jpg',
+      
     },
     dark: {
       screen: '#171823',
@@ -21,7 +22,7 @@ function App() {
       listTyping: '#C8CBE7',
       completed: '#4D5067',
       listBottomBorder: '#393A4B',
-      image: 'https://raw.githubusercontent.com/NKatsitadze/Todo-App/main/src/assets/BitmapNight.jpg',
+      image: 'src/assets/BitmapNight.jpg',
     }
   }
 
