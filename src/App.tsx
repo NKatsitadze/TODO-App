@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { useState } from "react";
 
 import day from './assets/Bitmap.jpg'
-import night from './assets/Bitmap.jpg';
+import night from './assets/BitmapNight.jpg';
 
 
 function App() {
